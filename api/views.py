@@ -8,7 +8,9 @@ from .services import MedicoService, ConsultaService
 
 
 class MedicoViewSet(viewsets.ModelViewSet):
-    queryset = Medico.objects.all()
+    # order_by: a paginação precisa de uma ordem fixa
+    # prefetch_related: busca as consultas de cada médico de uma vez só
+    queryset = Medico.objects.prefetch_related("consultas").order_by("id")
     serializer_class = MedicoSerializer
 
     filter_backends = [DjangoFilterBackend]
@@ -24,7 +26,7 @@ class MedicoViewSet(viewsets.ModelViewSet):
 
 
 class ConsultaViewSet(viewsets.ModelViewSet):
-    queryset = Consulta.objects.select_related("medico").all()
+    queryset = Consulta.objects.select_related("medico").order_by("id")
     serializer_class = ConsultaSerializer
 
     filter_backends = [DjangoFilterBackend]

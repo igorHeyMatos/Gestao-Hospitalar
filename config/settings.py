@@ -43,6 +43,9 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    # Paginação nativa: as listagens retornam 10 itens por página (?page=2, ?page=3...)
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
 }
 
 ROOT_URLCONF = 'config.urls'

@@ -31,7 +31,7 @@ CREATE DATABASE hospital_db CHARACTER SET utf8mb4;
 
 ```bash
 # entrar na pasta do projeto
-cd hospital_api
+cd Gestao-Hospitalar
 
 # criar o ambiente virtual
 python -m venv .venv
@@ -174,6 +174,17 @@ GET /api/consultas/?status=AGENDADA&valor_min=100&valor_max=500
 ### Filtro disponível em `/api/medicos/`
 - `?especialidade=Cardiologia`
 
+### Paginação
+As listagens retornam 10 registros por página. Para ver as próximas páginas use `?page=2`, `?page=3`, etc.
+A resposta vem no formato:
+```json
+{ "count": 2, "next": "http://127.0.0.1:8000/api/consultas/?page=2", "previous": null, "results": [ ... ] }
+```
+
+### Dados aninhados
+- `GET /api/consultas/<id>/` traz os dados completos do **médico** da consulta.
+- `GET /api/medicos/<id>/` traz a lista de **consultas** daquele médico.
+
 ---
 
 ## 10. Testando
@@ -185,7 +196,7 @@ Use o Postman, Insomnia, Thunder Client (VS Code) ou `curl` para testar todos os
 ## 11. Estrutura do projeto
 
 ```
-hospital_api/
+Gestao-Hospitalar/
 ├── manage.py
 ├── requirements.txt
 ├── .env.example
